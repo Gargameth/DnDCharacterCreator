@@ -66,6 +66,18 @@ namespace DnDCharacterGenerator
             CharacterHealth characterHealth = new CharacterHealth(characterClass.ReturnCharacterClass(), abilityModifiers["Constitution"]);
             Console.Clear();
 
+            Console.WriteLine("Pick a background for your character (yes, another number's game):");
+            Backgrounds backgrounds = new Backgrounds();
+            Dictionary<string, List<string>> backgroundCollection = backgrounds.ReturnBackgroundsCollection();
+            int indexerForBackgrounds = 1;
+            foreach (KeyValuePair<string, List<string>> backGrounds in backgroundCollection)
+            {
+                Console.WriteLine($"{indexerForBackgrounds}:" + " " + backGrounds.Key);
+                indexerForBackgrounds++;
+            }
+            
+            Console.ReadKey();
+
             Console.WriteLine($"\n You picked the class: {characterClass.ReturnCharacterClass()} \n");
             Console.WriteLine($"Your character's health is: {characterHealth.ReturnHealth()}\n");
             Console.WriteLine($"Your character's hit die type is D{characterHealth.ReturnHitDie().First().Key}. The amount of hit dice you have is: {characterHealth.ReturnHitDie().First().Value}\n");
