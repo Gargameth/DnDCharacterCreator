@@ -53,11 +53,12 @@ namespace DnDCharacterGenerator
 
         public void SetBackground(int backgroundsNumber)
         {
-            _chosenBackgrounds.Add(_backgrounds.ElementAt(backgroundsNumber).Key, new List<string> { _backgrounds.ElementAt(backgroundsNumber).Value[0]});
-            if (_backgrounds.ElementAt(backgroundsNumber).Value.Count() > 2)
+            List<string> backgroundSkillList = new List<string>();
+            foreach (var value in _backgrounds.ElementAt(backgroundsNumber).Value)
             {
-                return;
+                backgroundSkillList.Add(value.ToString());
             }
+            _chosenBackgrounds.Add(_backgrounds.ElementAt(backgroundsNumber).Key, backgroundSkillList);
         }
 
         public Dictionary<string, List<string>> ReturnBackgroundsCollection()
