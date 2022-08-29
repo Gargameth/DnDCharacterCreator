@@ -62,19 +62,21 @@ namespace DnDCharacterGenerator
             {
                 if (!Int32.TryParse(backgroundInput, out backgroundNumber) || backgroundNumber < 1 || backgroundNumber > 34)
                 {
-                    Console.WriteLine("\nI understand that adding one more number to the pressing options is complicated, but I have faith in you. So try your best in picking a damn number between 1 and 12.");
+                    Console.WriteLine("\nI understand that adding increasing the number you need to press is complicated, but I have faith in you. So try your best in picking a damn number between 1 and 33.");
                     backgroundInput = Console.ReadLine();
                 }
             }
 
             backgrounds.SetBackground(backgroundNumber - 1);
+            Skills skills = new Skills();
+            skills.AddSkills(backgrounds.ReturnPlayersBackgroundsCollection().First().Value);
 
             Console.WriteLine($"\n You picked the class: {characterClass.ReturnCharacterClass()} \n");
             Console.WriteLine($"Your character's health is: {characterHealth.ReturnHealth()}\n");
             Console.WriteLine($"Your character's hit die type is D{characterHealth.ReturnHitDie().First().Key}. The amount of hit dice you have is: {characterHealth.ReturnHitDie().First().Value}\n");
             Console.WriteLine($"Your character's background is: {backgrounds.ReturnPlayersBackgroundsCollection().First().Key}");
             Console.WriteLine($"Your character's starting skills are: ");
-            List<string> listOfBackgroundSkills = backgrounds.ReturnPlayersBackgroundsCollection().First().Value;
+            List<string> listOfBackgroundSkills = skills.ReturnSkills();
             foreach (var value in listOfBackgroundSkills)
             {
                 Console.WriteLine(value);
