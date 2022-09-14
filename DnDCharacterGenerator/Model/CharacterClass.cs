@@ -133,9 +133,9 @@ namespace DnDCharacterGenerator.Model
             printer.PrintSkillList(classSkills);
 
             var input = printer.ReadInput();
-            while (dummyClassSkills.Count == 0)
+            while (!AddSkillToList(input, printer))
             {
-                AddSkillToList(input, printer);
+                input = printer.ReadInput();
             }
 
             printer.ClearConsole();
@@ -143,9 +143,9 @@ namespace DnDCharacterGenerator.Model
             printer.PrintSkillList(classSkills);
 
             input = printer.ReadInput();
-            while (dummyClassSkills.Count == 1)
+            while (!AddSkillToList(input, printer))
             {
-                AddSkillToList(input, printer);
+                input = printer.ReadInput();
             }
 
             printer.ClearConsole();
@@ -153,9 +153,9 @@ namespace DnDCharacterGenerator.Model
             printer.PrintSkillList(classSkills);
 
             input = printer.ReadInput();
-            while (dummyClassSkills.Count == 2)
+            while (!AddSkillToList(input, printer))
             {
-                AddSkillToList(input, printer);
+                input = printer.ReadInput();
             }
 
             printer.ClearConsole();
@@ -163,25 +163,26 @@ namespace DnDCharacterGenerator.Model
             printer.PrintSkillList(classSkills);
             
             input = printer.ReadInput();
-            while (dummyClassSkills.Count == 3)
+            while (!AddSkillToList(input, printer))
             {
-                AddSkillToList(input, printer);
+                input = printer.ReadInput();
             }
 
             classSkills = dummyClassSkills;
         }
 
-        private void AddSkillToList(string input, CharacterClassPrinter printer)
+        private bool AddSkillToList(string input, CharacterClassPrinter printer)
         {
             if (classSkills.Contains(input))
             {
                 dummyClassSkills.Add(input);
                 classSkills.Remove(input);
+                return true;
             }
             else
             {
                 printer.InvalidInputWarning();
-                input = printer.ReadInput();
+                return false;
             }
         }
         private void SetClassSkills(CharacterClassPrinter printer)
