@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DnDCharacterGenerator.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,6 @@ namespace DnDCharacterGenerator
             {
                 if (_skills.Contains(skill))
                 {
-                    Console.WriteLine($"The skill {skill} is already in your list.");
                     continue;
                 }
                 else

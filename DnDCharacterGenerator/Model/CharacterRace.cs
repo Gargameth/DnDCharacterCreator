@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DnDCharacterGenerator.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,9 @@ namespace DnDCharacterGenerator.Model
     {
         private string _race;
 
-        public CharacterRace(int race)
+        public CharacterRace(CharacterRacePrinter printer)
         {
-            switch (race)
+            switch (RaceChooser(printer))
             {
                 case 1:
                     _race = "Human";
@@ -51,6 +52,22 @@ namespace DnDCharacterGenerator.Model
                     break;
             }
         }
+
+        private int RaceChooser(CharacterRacePrinter printer)
+        {
+            string chosenRace = printer.GetInput();
+            int raceNumber = 0;
+            while (raceNumber < 1 || raceNumber > 9)
+            {
+                if (!int.TryParse(chosenRace, out raceNumber) || raceNumber < 1 || raceNumber > 9)
+                {
+                    printer.PrintInvalidRaceInputText();
+                    chosenRace = printer.GetInput();
+                }
+            }
+            return raceNumber;
+        }
+
 
         public string ReturnRace()
         {

@@ -76,9 +76,9 @@ namespace DnDCharacterGenerator.Model
             printer.PrintSkillList(classSkills);
 
             var input = printer.ReadInput();
-            while (dummyClassSkills.Count == 0)
+            while (!AddSkillToList(input, printer))
             {
-                AddSkillToList(input, printer);
+                input = printer.ReadInput();
             }
 
             printer.ClearConsole();
@@ -86,9 +86,9 @@ namespace DnDCharacterGenerator.Model
             printer.PrintSkillList(classSkills);
 
             input = printer.ReadInput();
-            while (dummyClassSkills.Count == 1)
+            while (!AddSkillToList(input, printer))
             {
-                AddSkillToList(input, printer);
+                input = printer.ReadInput();
             }
             classSkills = dummyClassSkills;
             printer.ClearConsole();
@@ -100,9 +100,9 @@ namespace DnDCharacterGenerator.Model
             printer.PrintSkillList(classSkills);
 
             var input = printer.ReadInput();
-            while (dummyClassSkills.Count == 0)
+            while (!AddSkillToList(input, printer))
             {
-                AddSkillToList(input, printer);
+                input = printer.ReadInput();
             }
 
             printer.ClearConsole();
@@ -110,9 +110,9 @@ namespace DnDCharacterGenerator.Model
             printer.PrintSkillList(classSkills);
 
             input = printer.ReadInput();
-            while (dummyClassSkills.Count == 1)
+            while (!AddSkillToList(input, printer))
             {
-                AddSkillToList(input, printer);
+                input = printer.ReadInput();
             }
 
             printer.ClearConsole();
@@ -120,11 +120,12 @@ namespace DnDCharacterGenerator.Model
             printer.PrintSkillList(classSkills);
 
             input = printer.ReadInput();
-            while (dummyClassSkills.Count == 2)
+            while (!AddSkillToList(input, printer))
             {
-                AddSkillToList(input, printer);
+                input = printer.ReadInput();
             }
             classSkills = dummyClassSkills;
+            printer.ClearConsole();
         }
 
         private void ChooseFourClassSkills(CharacterClassPrinter printer)
@@ -169,6 +170,7 @@ namespace DnDCharacterGenerator.Model
             }
 
             classSkills = dummyClassSkills;
+            printer.ClearConsole();
         }
 
         private bool AddSkillToList(string input, CharacterClassPrinter printer)

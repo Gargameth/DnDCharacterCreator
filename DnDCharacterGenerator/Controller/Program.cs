@@ -17,21 +17,12 @@ namespace DnDCharacterGenerator.Controller
             printer.PrintGreetings();
             printer.PrintRaceOptions();
 
-            var raceInput = Console.ReadLine();
-            int raceNumber = 0;
-            while (raceNumber < 1 || raceNumber > 9)
-            {
-                if (!int.TryParse(raceInput, out raceNumber) || raceNumber < 1 || raceNumber > 9)
-                {
-                    Console.WriteLine("\nWhy is picking a number from 1 to 9 that difficult?");
-                    raceInput = Console.ReadLine();
-                }
-            }
-            CharacterRace characterRace = new CharacterRace(raceNumber);
+            CharacterRacePrinter characterRacePrinter = new CharacterRacePrinter();
+            CharacterRace characterRace = new CharacterRace(characterRacePrinter);
 
             Console.Clear();
             Console.WriteLine($"\n You picked the race: {characterRace.ReturnRace()} \n");
-            CharacterAttributes characterAttributes = new CharacterAttributes(int.Parse(raceInput));
+            CharacterAttributes characterAttributes = new CharacterAttributes(characterRace.ReturnRace());
             Dictionary<string, int> attributesCollection = characterAttributes.ReturnAttributes();
 
             printer.PrintClassOptions();

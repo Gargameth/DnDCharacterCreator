@@ -16,7 +16,7 @@ namespace DnDCharacterGenerator
         private Dictionary<string, int> attributeModifiers = new Dictionary<string, int>();
 
 
-        public CharacterAttributes(int race)
+        public CharacterAttributes(string race)
         {
             attributes.Add("Strength", RollAttributeDice());
             attributes.Add("Dexterity", RollAttributeDice());
@@ -116,7 +116,7 @@ namespace DnDCharacterGenerator
             return attribute;
         }
 
-        private void AddRaceBonus(int characterRace)
+        private void AddRaceBonus(string characterRace)
         {
             Random random = new Random();
             switch (characterRace)
@@ -124,9 +124,7 @@ namespace DnDCharacterGenerator
                 ///Copy attributes dictionary, then pick one key randomly from the copy, then increase
                 ///the int on the original one according to the copy's key. It there is no random picking of 
                 ///attributes, simply increase the appropriate attribute in the original dictionary.
-                
-                ///Human
-                case 1:
+                case "Human":
                     Dictionary<string,int> humanBonus = new Dictionary<string,int>(attributes);
                     int firstRandomPickHuman = random.Next(0, humanBonus.Count());
                     string firstIncreasedAbilityScoreHuman = humanBonus.ElementAt(firstRandomPickHuman).Key;
@@ -137,34 +135,28 @@ namespace DnDCharacterGenerator
                     attributes[secondIncreasedAbilityScoreHuman] += 1;
                     break;
 
-                ///Dwarf
-                case 2:
+                case "Dwarf":
                     attributes["Constitution"] += 2;
                     break;
 
-                ///Elf
-                case 3:
+                case "Elf":
                     attributes["Dexterity"] += 2;
                     break;
 
-                ///Dragonborn
-                case 5:
+                case "Dragonborn":
                     attributes["Strength"] += 2;
                     attributes["Charisma"] += 1;
                     break;
 
-                ///Thiefling
-                case 8:
+                case "Thiefling":
                     attributes["Charisma"] += 2;
                     break;
 
-                ///Halfling
-                case 4:
+                case "Halfling":
                     attributes["Dexterity"] += 2;
                     break;
 
-                ///Half-elf
-                case 6:
+                case "Half-elf":
                     attributes["Charisma"] += 2;
                     Dictionary<string, int> halfElfBonus = new Dictionary<string, int>(attributes);
                     halfElfBonus.Remove("Charisma");
@@ -177,14 +169,12 @@ namespace DnDCharacterGenerator
                     attributes[secondIncreasedAbilityScoreHalfElf] += 1;
                     break;
 
-                ///Half-orc
-                case 7:
+                case "Half-orc":
                     attributes["Strength"] += 2;
                     attributes["Constitution"] += 1;
                     break;
 
-                ///Gnome
-                case 9:
+                case "Gnome":
                     attributes["Intelligence"] += 2;
                     break;
             }
