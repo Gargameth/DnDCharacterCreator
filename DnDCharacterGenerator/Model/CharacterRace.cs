@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DnDCharacterGenerator
+namespace DnDCharacterGenerator.Model
 {
     internal class CharacterRace
     {
@@ -17,7 +17,7 @@ namespace DnDCharacterGenerator
                 case 1:
                     _race = "Human";
                     break;
-                
+
                 case 2:
                     _race = "Dwarf";
                     break;

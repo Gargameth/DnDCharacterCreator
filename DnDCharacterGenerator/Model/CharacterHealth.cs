@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DnDCharacterGenerator
+namespace DnDCharacterGenerator.Model
 {
     internal class CharacterHealth
     {
@@ -63,10 +63,10 @@ namespace DnDCharacterGenerator
                     hitDie.Add(6, 1);
                     break;
             }
-            
+
             if (hitDie.First().Value == 1)
             {
-                this.health = hitDie.First().Key + constitutionModifier;
+                health = hitDie.First().Key + constitutionModifier;
             }
 
             else
@@ -74,19 +74,19 @@ namespace DnDCharacterGenerator
                 Random random = new Random();
                 for (int i = 0; i < hitDie.First().Value; i++)
                 {
-                    this.health += random.Next(0, hitDie.First().Value) + constitutionModifier;
+                    health += random.Next(0, hitDie.First().Value) + constitutionModifier;
                 }
             }
         }
 
         public int ReturnHealth()
         {
-            return this.health;
+            return health;
         }
 
         public Dictionary<int, int> ReturnHitDie()
         {
-            return this.hitDie;
+            return hitDie;
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DnDCharacterGenerator
+namespace DnDCharacterGenerator.Model
 {
     internal class Backgrounds
     {
@@ -13,7 +13,7 @@ namespace DnDCharacterGenerator
 
         public Backgrounds()
         {
-            _backgrounds.Add("Acolyte", new List<string> { "Insight", "Religion"});
+            _backgrounds.Add("Acolyte", new List<string> { "Insight", "Religion" });
             _backgrounds.Add("Anthropologist", new List<string> { "Insight", "Religion" });
             _backgrounds.Add("Archeologist", new List<string> { "History", "Survival" });
             _backgrounds.Add("Athlete", new List<string> { "Acrobatics", "Athletics" });
@@ -51,14 +51,11 @@ namespace DnDCharacterGenerator
             _backgrounds.Add("Soldier", new List<string> { "Athletics", "Intimidation" });
         }
 
+        //Create a list of skills using the values of the chosen background in the background's list.
+        //Fill that list up with strings, then add it to the chosen backgrounds dictionary 
         public void SetBackground(int backgroundsNumber)
         {
-            List<string> backgroundSkillList = new List<string>();
-            foreach (var value in _backgrounds.ElementAt(backgroundsNumber).Value)
-            {
-                backgroundSkillList.Add(value.ToString());
-            }
-            _chosenBackgrounds.Add(_backgrounds.ElementAt(backgroundsNumber).Key, backgroundSkillList);
+            _chosenBackgrounds.Add(_backgrounds.ElementAt(backgroundsNumber).Key, _backgrounds.ElementAt(backgroundsNumber).Value);
         }
 
         public Dictionary<string, List<string>> ReturnBackgroundsCollection()

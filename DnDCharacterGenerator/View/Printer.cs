@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DnDCharacterGenerator.Model;
 
-namespace DnDCharacterGenerator
+namespace DnDCharacterGenerator.View
 {
     internal class Printer
     {
