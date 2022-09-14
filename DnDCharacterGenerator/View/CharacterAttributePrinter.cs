@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DnDCharacterGenerator.View
 {
-    internal class CharacterAttributePrinter
+    internal class CharacterAttributePrinter : BasePrinter
     {
         public CharacterAttributePrinter()
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DnDCharacterGenerator.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,10 +52,27 @@ namespace DnDCharacterGenerator.Model
             _backgrounds.Add("Soldier", new List<string> { "Athletics", "Intimidation" });
         }
 
+        private int SetBackgroundNumber(CharacterBackgroundsPrinter printer)
+        {
+            int backgroundNumber = 0;
+            var backgroundInput = printer.ReadInput();
+
+            while (backgroundNumber < 1 || backgroundNumber > 32)
+            {
+                if (!int.TryParse(backgroundInput, out backgroundNumber) || backgroundNumber < 1 || backgroundNumber > 32)
+                {
+                    printer.InvalidInputWarning();
+                    backgroundInput = Console.ReadLine();
+                }
+            }
+            return backgroundNumber - 1;
+        }
+
         //Create a list of skills using the values of the chosen background in the background's list.
         //Fill that list up with strings, then add it to the chosen backgrounds dictionary 
-        public void SetBackground(int backgroundsNumber)
+        public void SetBackground(CharacterBackgroundsPrinter printer)
         {
+            int backgroundsNumber = SetBackgroundNumber(printer);
             _chosenBackgrounds.Add(_backgrounds.ElementAt(backgroundsNumber).Key, _backgrounds.ElementAt(backgroundsNumber).Value);
         }
 

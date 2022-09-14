@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DnDCharacterGenerator.View
 {
-    internal class SkillsPrinter
+    internal class SkillsPrinter : BasePrinter
     {
         public SkillsPrinter()
         {
@@ -15,6 +15,15 @@ namespace DnDCharacterGenerator.View
         public void SkillAlreadyInTheListWarning(string skill)
         {
             Console.WriteLine($"The skill {skill} is already in your list.");
+        }
+
+        public void PrintBackgroundSkills(List<string> skills)
+        {
+            Console.WriteLine($"Your character's starting skills via background are: \n");
+            foreach (var value in skills)
+            {
+                Console.WriteLine(value);
+            }
         }
     }
 }

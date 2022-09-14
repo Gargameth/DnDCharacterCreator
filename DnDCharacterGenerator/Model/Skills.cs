@@ -9,30 +9,24 @@ namespace DnDCharacterGenerator
 {
     internal class Skills
     {
-        private List<string> _skills = new List<string>();
+        private List<string> _skillsFromBackground = new List<string>();
+        private List<string> _skillsFromClass = new List<string>();
 
         public Skills()
         {
         }
 
-        public void AddSkills(List<string> skills)
+        public void AddSkillsFromBackground(List<string> skills)
         {
             foreach (var skill in skills)
             {
-                if (_skills.Contains(skill))
-                {
-                    continue;
-                }
-                else
-                {
-                    _skills.Add(skill);
-                }
+                _skillsFromBackground.Add(skill);
             }
         }
 
-        public List<string> ReturnSkills()
+        public List<string> ReturnSkillsFromBackground()
         {
-            return _skills;
+            return _skillsFromBackground;
         }
     }
 }

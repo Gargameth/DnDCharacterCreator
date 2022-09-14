@@ -14,9 +14,9 @@ namespace DnDCharacterGenerator.Model
         private List<string> classSkills = new List<string>();
         private List<string> dummyClassSkills = new List<string>();
 
-        public CharacterClass(int charactersClass, CharacterClassPrinter printer)
+        public CharacterClass(CharacterClassPrinter printer)
         {
-            switch (charactersClass)
+            switch (CreateClass(printer))
             {
                 case 1:
                     characterClass = "Barbarian";
@@ -70,6 +70,21 @@ namespace DnDCharacterGenerator.Model
             SetClassSkills(printer);
         }
 
+        private int CreateClass(CharacterClassPrinter printer)
+        {
+            var classInput = printer.ReadInput();
+            int classNumber = 0;
+
+            while (classNumber < 1 || classNumber > 12)
+            {
+                if (!int.TryParse(classInput, out classNumber) || classNumber < 1 || classNumber > 12)
+                {
+                    printer.InvalidInputWarning();
+                    classInput = Console.ReadLine();
+                }
+            }
+            return classNumber;
+        }
         private void ChooseTwoClassSkills(CharacterClassPrinter printer)
         {
             printer.SetFirstClassSkillText();
