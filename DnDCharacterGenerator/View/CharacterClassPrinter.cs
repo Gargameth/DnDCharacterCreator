@@ -27,6 +27,11 @@ namespace DnDCharacterGenerator.View
             Console.WriteLine("It's amazing, but you can have a third class skill... if you can spell it correctly: \n");
         }
 
+        public void SetFourthClassSkillText()
+        {
+            Console.WriteLine("This is getting annoying, I know, but I promise, this is the last skill you need to pick... honest:\n");
+        }
+
         public void PrintSkillList(List<string> skills)
         {
             foreach (string skill in skills)

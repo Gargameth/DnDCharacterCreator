@@ -120,10 +120,54 @@ namespace DnDCharacterGenerator.Model
             printer.PrintSkillList(classSkills);
 
             input = printer.ReadInput();
+            while (dummyClassSkills.Count == 2)
+            {
+                AddSkillToList(input, printer);
+            }
+            classSkills = dummyClassSkills;
+        }
+
+        private void ChooseFourClassSkills(CharacterClassPrinter printer)
+        {
+            printer.SetFirstClassSkillText();
+            printer.PrintSkillList(classSkills);
+
+            var input = printer.ReadInput();
+            while (dummyClassSkills.Count == 0)
+            {
+                AddSkillToList(input, printer);
+            }
+
+            printer.ClearConsole();
+            printer.SetSecondClassSkillText();
+            printer.PrintSkillList(classSkills);
+
+            input = printer.ReadInput();
             while (dummyClassSkills.Count == 1)
             {
                 AddSkillToList(input, printer);
             }
+
+            printer.ClearConsole();
+            printer.SetThirdClassSkillText();
+            printer.PrintSkillList(classSkills);
+
+            input = printer.ReadInput();
+            while (dummyClassSkills.Count == 2)
+            {
+                AddSkillToList(input, printer);
+            }
+
+            printer.ClearConsole();
+            printer.SetFourthClassSkillText();
+            printer.PrintSkillList(classSkills);
+            
+            input = printer.ReadInput();
+            while (dummyClassSkills.Count == 3)
+            {
+                AddSkillToList(input, printer);
+            }
+
             classSkills = dummyClassSkills;
         }
 
@@ -176,33 +220,114 @@ namespace DnDCharacterGenerator.Model
                     break;
 
                 case "Cleric":
+                    classSkills.Add("History");
+                    classSkills.Add("Insight");
+                    classSkills.Add("Medicine");
+                    classSkills.Add("Persuasion");
+                    classSkills.Add("Religion");
+                    ChooseTwoClassSkills(printer);
                     break;
 
                 case "Druid":
+                    classSkills.Add("Arcana");
+                    classSkills.Add("Animal Handling");
+                    classSkills.Add("Insight");
+                    classSkills.Add("Medicine");
+                    classSkills.Add("Nature");
+                    classSkills.Add("Perception");
+                    classSkills.Add("Religion");
+                    classSkills.Add("Survival");
+                    ChooseTwoClassSkills(printer);
                     break;
 
                 case "Fighter":
+                    classSkills.Add("Acrobatics");
+                    classSkills.Add("Animal Handling");
+                    classSkills.Add("Athletics");
+                    classSkills.Add("History");
+                    classSkills.Add("Insight");
+                    classSkills.Add("Intimidation");
+                    classSkills.Add("Perception");
+                    classSkills.Add("Survival");
+                    ChooseTwoClassSkills(printer);
                     break;
 
                 case "Monk":
+                    classSkills.Add("Acrobatics");
+                    classSkills.Add("Athletics");
+                    classSkills.Add("History");
+                    classSkills.Add("Insight");
+                    classSkills.Add("Religion");
+                    classSkills.Add("Stealth");
+                    ChooseTwoClassSkills(printer);
                     break;
 
                 case "Paladin":
+                    classSkills.Add("Athletics");
+                    classSkills.Add("Insight");
+                    classSkills.Add("Intimidation");
+                    classSkills.Add("Medicine");
+                    classSkills.Add("Persuasion");
+                    classSkills.Add("Religion");
+                    ChooseTwoClassSkills(printer);
                     break;
 
                 case "Ranger":
+                    classSkills.Add("Animal Handling");
+                    classSkills.Add("Athletics");
+                    classSkills.Add("Insight");
+                    classSkills.Add("Investigation");
+                    classSkills.Add("Nature");
+                    classSkills.Add("Perception");
+                    classSkills.Add("Stealth");
+                    classSkills.Add("Survival");
+                    ChooseTwoClassSkills(printer);
                     break;
 
                 case "Rogue":
+                    classSkills.Add("Acrobatics");
+                    classSkills.Add("Athletics");
+                    classSkills.Add("Deception");
+                    classSkills.Add("Insight");
+                    classSkills.Add("Intimidation");
+                    classSkills.Add("Investigation");
+                    classSkills.Add("Perception");
+                    classSkills.Add("Performance");
+                    classSkills.Add("Persuasion");
+                    classSkills.Add("Sleight of Hand");
+                    classSkills.Add("Stealth");
+                    ChooseFourClassSkills(printer);
                     break;
 
                 case "Sorcerer":
+                    classSkills.Add("Arcana");
+                    classSkills.Add("Deception");
+                    classSkills.Add("Insight");
+                    classSkills.Add("Intimidation");
+                    classSkills.Add("Persuasion");
+                    classSkills.Add("Religion");
+                    ChooseTwoClassSkills(printer);
                     break;
 
                 case "Warlock":
+                    classSkills.Add("Arcana");
+                    classSkills.Add("Deception");
+                    classSkills.Add("History");
+                    classSkills.Add("Intimidation");
+                    classSkills.Add("Investigation");
+                    classSkills.Add("Nature");
+                    classSkills.Add("Religion");
+                    ChooseTwoClassSkills(printer);
                     break;
 
                 case "Wizard":
+                    classSkills.Add("Arcana");
+                    classSkills.Add("History");
+                    classSkills.Add("Insight");
+                    classSkills.Add("Investigation");
+                    classSkills.Add("Medicine");
+                    classSkills.Add("Religion");
+                    ChooseTwoClassSkills(printer);
                     break;
             }
 
