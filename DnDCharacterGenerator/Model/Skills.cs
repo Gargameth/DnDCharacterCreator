@@ -1,4 +1,5 @@
-﻿using DnDCharacterGenerator.View;
+﻿using DnDCharacterGenerator.Model;
+using DnDCharacterGenerator.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,24 +10,28 @@ namespace DnDCharacterGenerator
 {
     internal class Skills
     {
-        private List<string> _skillsFromBackground = new List<string>();
-        private List<string> _skillsFromClass = new List<string>();
+        private List<string> _skillsList = new List<string>();
 
-        public Skills()
+        public Skills(CharacterClass characterClass)
         {
+            _skillsList = characterClass.ReturnClassSkills();
         }
 
         public void AddSkillsFromBackground(List<string> skills)
         {
             foreach (var skill in skills)
             {
-                _skillsFromBackground.Add(skill);
+                if (_skillsList.Contains(skill))
+                {
+                    continue;
+                }
+                else { _skillsList.Add(skill); }
             }
         }
 
-        public List<string> ReturnSkillsFromBackground()
+        public List<string> ReturnSkills()
         {
-            return _skillsFromBackground;
+            return _skillsList;
         }
     }
 }

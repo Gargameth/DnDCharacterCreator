@@ -43,7 +43,7 @@ namespace DnDCharacterGenerator.Controller
             characterBackgroundsPrinter.PrintBackgrounds(backgrounds);
             backgrounds.SetBackground(characterBackgroundsPrinter);
 
-            Skills skills = new Skills();
+            Skills skills = new Skills(characterClass);
             SkillsPrinter skillsPrinter = new SkillsPrinter();
 
             skills.AddSkillsFromBackground(backgrounds.ReturnPlayersBackgroundsCollection().First().Value);
@@ -52,7 +52,7 @@ namespace DnDCharacterGenerator.Controller
             healthPrinter.PrintHealthOfCharacter(characterHealth);
             healthPrinter.PrintHitDieOfCharacter(characterHealth);
             characterBackgroundsPrinter.PrintChosenBackground(backgrounds);
-            skillsPrinter.PrintBackgroundSkills(skills.ReturnSkillsFromBackground());
+            skillsPrinter.PrintSkills(skills.ReturnSkills());
 
             CharacterAttributePrinter attributePrinter = new CharacterAttributePrinter();
             attributePrinter.PrintAttributes(attributesCollection);

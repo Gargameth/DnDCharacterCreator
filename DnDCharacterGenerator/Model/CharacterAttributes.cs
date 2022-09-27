@@ -104,9 +104,9 @@ namespace DnDCharacterGenerator
             int attribute = 0;
             for (int i = 0; i < 4; i++)
             {
-                Rolls.Add(random.Next(1,6));
+                Rolls.Add(random.Next(1,7));
             }
-
+            
             Rolls.Sort();
             Rolls.Remove(Rolls[0]);
             for (int i = 0; i < Rolls.Count; i++)

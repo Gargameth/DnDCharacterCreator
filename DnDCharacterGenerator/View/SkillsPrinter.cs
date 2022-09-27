@@ -17,9 +17,9 @@ namespace DnDCharacterGenerator.View
             Console.WriteLine($"The skill {skill} is already in your list.");
         }
 
-        public void PrintBackgroundSkills(List<string> skills)
+        public void PrintSkills(List<string> skills)
         {
-            Console.WriteLine($"Your character's starting skills via background are: \n");
+            Console.WriteLine($"Your character's starting skills are: \n");
             foreach (var value in skills)
             {
                 Console.WriteLine(value);
