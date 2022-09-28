@@ -21,5 +21,18 @@ namespace DnDCharacterGenerator.View
                 Console.WriteLine(attribute.Key + " " + attribute.Value);
             }
         }
+
+        public void AskForAttribute(string attributeScore)
+        {
+            Console.WriteLine($"Assign a score to {attributeScore}.");
+        }
+
+        public void PrintAbilityScores(List<int> scores)
+        {
+            foreach(int score in scores)
+            {
+                Console.WriteLine(score);
+            }
+        }
     }
 }

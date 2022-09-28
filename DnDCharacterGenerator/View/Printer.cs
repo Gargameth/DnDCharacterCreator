@@ -33,9 +33,5 @@ namespace DnDCharacterGenerator.View
             Console.WriteLine("8. Thiefling");
             Console.WriteLine("9. Gnome");
         }
-
-        
-
-        
     }
 }

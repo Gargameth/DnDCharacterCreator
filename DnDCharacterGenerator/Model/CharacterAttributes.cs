@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DnDCharacterGenerator.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +15,43 @@ namespace DnDCharacterGenerator
         /// </summary>
         private Dictionary<string, int> attributes = new Dictionary<string, int>();
         private Dictionary<string, int> attributeModifiers = new Dictionary<string, int>();
+        private List<int> rawAttributeScores = new List<int>();
+        private List<string> attributeScores = new List<string>() { "Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"};
 
-
-        public CharacterAttributes(string race)
+        public CharacterAttributes(string race, CharacterAttributePrinter printer)
         {
-            attributes.Add("Strength", RollAttributeDice());
-            attributes.Add("Dexterity", RollAttributeDice());
-            attributes.Add("Constitution", RollAttributeDice());
-            attributes.Add("Intelligence", RollAttributeDice());
-            attributes.Add("Wisdom", RollAttributeDice());
-            attributes.Add("Charisma", RollAttributeDice());
+            RollAttributeDice();
+            AssignScoresToAttribute(printer);
             AddRaceBonus(race);
             SetModifiers();
+            printer.PrintAttributes(attributes);
+        }
+
+        private void AssignScoresToAttribute(CharacterAttributePrinter printer)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                attributes[attributeScores[i]] = 0;
+            }
+            
+            while (rawAttributeScores.Count() > 0)
+            {
+                printer.ClearConsole();
+                printer.PrintAbilityScores(rawAttributeScores);
+                printer.AskForAttribute(attributeScores[0]);
+                var input = printer.ReadInput();
+                int abilityScore = 0;
+                if (!int.TryParse(input, out abilityScore) || rawAttributeScores.IndexOf(abilityScore) == -1)
+                {
+                    printer.InvalidInputWarning();
+                }
+                else
+                {
+                    attributes[attributeScores[0]] = abilityScore;
+                    rawAttributeScores.Remove(abilityScore);
+                    attributeScores.Remove(attributeScores[0]);
+                }
+            }
         }
 
         private int CalculateModifiers(int attributeScore)
@@ -97,8 +123,22 @@ namespace DnDCharacterGenerator
             }
         }
 
-        private int RollAttributeDice()
+        private void RollAttributeDice()
         {
+            Random random = new Random();
+            for (int i = 0; i < 6; i++)
+            {
+                List<int> Rolls = new List<int>();
+                for (int j = 0; j < 4; j++)
+                {
+                    Rolls.Add(random.Next(1, 7));
+                }
+                Rolls.Sort();
+                Rolls.Remove(Rolls[0]);
+                int rawAbilityScore = Rolls.Take(3).Sum();
+                rawAttributeScores.Add(rawAbilityScore);
+            }
+            /*
             List<int> Rolls = new List<int>();
             Random random = new Random();
             int attribute = 0;
@@ -113,7 +153,7 @@ namespace DnDCharacterGenerator
             {
                 attribute += Rolls[i];
             }
-            return attribute;
+            return attribute;*/
         }
 
         private void AddRaceBonus(string characterRace)

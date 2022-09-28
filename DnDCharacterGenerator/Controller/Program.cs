@@ -22,8 +22,9 @@ namespace DnDCharacterGenerator.Controller
             CharacterRace characterRace = new CharacterRace(characterRacePrinter);
 
             characterRacePrinter.PrintCharacterRace(characterRace);
-            
-            CharacterAttributes characterAttributes = new CharacterAttributes(characterRace.ReturnRace());
+
+            CharacterAttributePrinter attributePrinter = new CharacterAttributePrinter();
+            CharacterAttributes characterAttributes = new CharacterAttributes(characterRace.ReturnRace(), attributePrinter);
             
             Dictionary<string, int> attributesCollection = characterAttributes.ReturnAttributes();
 
@@ -54,7 +55,6 @@ namespace DnDCharacterGenerator.Controller
             characterBackgroundsPrinter.PrintChosenBackground(backgrounds);
             skillsPrinter.PrintSkills(skills.ReturnSkills());
 
-            CharacterAttributePrinter attributePrinter = new CharacterAttributePrinter();
             attributePrinter.PrintAttributes(attributesCollection);
         }
     }
