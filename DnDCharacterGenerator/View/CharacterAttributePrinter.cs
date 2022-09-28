@@ -34,5 +34,15 @@ namespace DnDCharacterGenerator.View
                 Console.WriteLine(score);
             }
         }
+
+        public void AskForFirstAttributeForRaceBonus()
+        {
+            Console.WriteLine("Enter the first attribute you want to increase.");
+        }
+
+        public void AskForSecondAttributeForRaceBonus()
+        {
+            Console.WriteLine("Enter the second attribute you want to increase.");
+        }
     }
 }

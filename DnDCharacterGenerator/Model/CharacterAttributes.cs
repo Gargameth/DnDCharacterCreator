@@ -22,7 +22,7 @@ namespace DnDCharacterGenerator
         {
             RollAttributeDice();
             AssignScoresToAttribute(printer);
-            AddRaceBonus(race);
+            AddRaceBonus(race, printer);
             SetModifiers();
             printer.PrintAttributes(attributes);
         }
@@ -33,23 +33,26 @@ namespace DnDCharacterGenerator
             {
                 attributes[attributeScores[i]] = 0;
             }
+
+            List<string> dummyAttributeScores = attributeScores.ToList();
             
             while (rawAttributeScores.Count() > 0)
             {
-                printer.ClearConsole();
                 printer.PrintAbilityScores(rawAttributeScores);
-                printer.AskForAttribute(attributeScores[0]);
+                printer.AskForAttribute(dummyAttributeScores[0]);
                 var input = printer.ReadInput();
                 int abilityScore = 0;
                 if (!int.TryParse(input, out abilityScore) || rawAttributeScores.IndexOf(abilityScore) == -1)
                 {
                     printer.InvalidInputWarning();
+                    Console.ReadLine();
                 }
                 else
                 {
-                    attributes[attributeScores[0]] = abilityScore;
+                    attributes[dummyAttributeScores[0]] = abilityScore;
                     rawAttributeScores.Remove(abilityScore);
-                    attributeScores.Remove(attributeScores[0]);
+                    dummyAttributeScores.Remove(dummyAttributeScores[0]);
+                    printer.ClearConsole();
                 }
             }
         }
@@ -138,41 +141,46 @@ namespace DnDCharacterGenerator
                 int rawAbilityScore = Rolls.Take(3).Sum();
                 rawAttributeScores.Add(rawAbilityScore);
             }
-            /*
-            List<int> Rolls = new List<int>();
-            Random random = new Random();
-            int attribute = 0;
-            for (int i = 0; i < 4; i++)
-            {
-                Rolls.Add(random.Next(1,7));
-            }
-            
-            Rolls.Sort();
-            Rolls.Remove(Rolls[0]);
-            for (int i = 0; i < Rolls.Count; i++)
-            {
-                attribute += Rolls[i];
-            }
-            return attribute;*/
         }
 
-        private void AddRaceBonus(string characterRace)
+        private void ChooseAttributesToIncreaseAsBonus(CharacterAttributePrinter printer)
         {
-            Random random = new Random();
+            List<string> bonus = new List<string>(attributeScores);
+            while (bonus.Count > 4)
+            {
+                if (bonus.Count == 6)
+                {
+                    printer.AskForFirstAttributeForRaceBonus();
+                }
+                else
+                {
+                    printer.AskForSecondAttributeForRaceBonus();
+                }
+
+                var input = printer.ReadInput();
+
+                if (!bonus.Contains(input))
+                {
+                    printer.InvalidInputWarning();
+                }
+                else
+                {
+                    bonus.Remove(input);
+                    attributes[input]++;
+                    printer.ClearConsole();
+                }
+            }
+        }
+
+        private void AddRaceBonus(string characterRace, CharacterAttributePrinter printer)
+        {
             switch (characterRace)
             {
                 ///Copy attributes dictionary, then pick one key randomly from the copy, then increase
                 ///the int on the original one according to the copy's key. It there is no random picking of 
                 ///attributes, simply increase the appropriate attribute in the original dictionary.
                 case "Human":
-                    Dictionary<string,int> humanBonus = new Dictionary<string,int>(attributes);
-                    int firstRandomPickHuman = random.Next(0, humanBonus.Count());
-                    string firstIncreasedAbilityScoreHuman = humanBonus.ElementAt(firstRandomPickHuman).Key;
-                    attributes[firstIncreasedAbilityScoreHuman] += 1;
-                    humanBonus.Remove(firstIncreasedAbilityScoreHuman);
-                    int secondRandomPickHuman = random.Next(0, humanBonus.Count());
-                    string secondIncreasedAbilityScoreHuman = humanBonus.ElementAt(secondRandomPickHuman).Key;
-                    attributes[secondIncreasedAbilityScoreHuman] += 1;
+                    ChooseAttributesToIncreaseAsBonus(printer);
                     break;
 
                 case "Dwarf":
@@ -198,15 +206,7 @@ namespace DnDCharacterGenerator
 
                 case "Half-elf":
                     attributes["Charisma"] += 2;
-                    Dictionary<string, int> halfElfBonus = new Dictionary<string, int>(attributes);
-                    halfElfBonus.Remove("Charisma");
-                    int firstRandomPickHalfElf = random.Next(0, halfElfBonus.Count());
-                    string firstIncreasedAbilityScoreHalfElf = halfElfBonus.ElementAt(firstRandomPickHalfElf).Key;
-                    attributes[firstIncreasedAbilityScoreHalfElf] += 1;
-                    halfElfBonus.Remove(firstIncreasedAbilityScoreHalfElf);
-                    int secondRandomPickHalfElf = random.Next(0, halfElfBonus.Count());
-                    string secondIncreasedAbilityScoreHalfElf = halfElfBonus.ElementAt(secondRandomPickHalfElf).Key;
-                    attributes[secondIncreasedAbilityScoreHalfElf] += 1;
+                    ChooseAttributesToIncreaseAsBonus(printer);
                     break;
 
                 case "Half-orc":
