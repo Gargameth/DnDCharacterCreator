@@ -14,7 +14,7 @@ namespace DnDCharacterGenerator.View
             return input;
         }
 
-        public void InvalidInputWarning()
+        public virtual void InvalidInputWarning()
         {
             Console.WriteLine("Invalid input. Please try again.");
         }

@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using DnDCharacterGenerator.Model;
 using DnDCharacterGenerator.View;
+using Xamarin.Forms;
 
 namespace DnDCharacterGenerator.Controller
 {
@@ -16,7 +17,6 @@ namespace DnDCharacterGenerator.Controller
             Printer printer = new Printer();
             
             printer.PrintGreetings();
-            printer.PrintRaceOptions();
 
             CharacterRacePrinter characterRacePrinter = new CharacterRacePrinter();
             CharacterRace characterRace = new CharacterRace(characterRacePrinter);

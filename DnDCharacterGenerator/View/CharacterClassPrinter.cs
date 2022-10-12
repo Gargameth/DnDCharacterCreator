@@ -44,18 +44,18 @@ namespace DnDCharacterGenerator.View
         public void PrintClassOptions()
         {
             Console.WriteLine("Please choose the class of your character (pick another number; I know, it's complicated).\n");
-            Console.WriteLine("1. Barbarian");
-            Console.WriteLine("2. Bard");
-            Console.WriteLine("3. Cleric");
-            Console.WriteLine("4. Druid");
-            Console.WriteLine("5. Fighter");
-            Console.WriteLine("6. Monk");
-            Console.WriteLine("7. Paladin");
-            Console.WriteLine("8. Ranger");
-            Console.WriteLine("9. Rogue");
-            Console.WriteLine("10. Sorcerer");
-            Console.WriteLine("11. Warlock");
-            Console.WriteLine("12. Wizard\n");
+            Console.Write("1. Barbarian | ");
+            Console.Write("2. Bard | ");
+            Console.Write("3. Cleric | ");
+            Console.Write("4. Druid | ");
+            Console.Write("5. Fighter | ");
+            Console.Write("6. Monk | ");
+            Console.Write("7. Paladin | ");
+            Console.Write("8. Ranger | ");
+            Console.Write("9. Rogue | ");
+            Console.Write("10. Sorcerer | ");
+            Console.Write("11. Warlock | ");
+            Console.Write("12. Wizard\n");
         }
 
         public void PrintClassChoice(CharacterClass characterClass)

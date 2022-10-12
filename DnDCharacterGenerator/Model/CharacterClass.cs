@@ -348,14 +348,6 @@ namespace DnDCharacterGenerator.Model
                     ChooseTwoClassSkills(printer);
                     break;
             }
-
-
-            foreach (string skill in classSkills)
-            {
-                Console.WriteLine(skill);
-            }
-            Console.ReadLine();
-
         }
 
         public string ReturnCharacterClass()

@@ -62,7 +62,7 @@ namespace DnDCharacterGenerator.Model
                 if (!int.TryParse(backgroundInput, out backgroundNumber) || backgroundNumber < 1 || backgroundNumber > 32)
                 {
                     printer.InvalidInputWarning();
-                    backgroundInput = Console.ReadLine();
+                    backgroundInput = printer.ReadInput();
                 }
             }
             return backgroundNumber - 1;

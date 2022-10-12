@@ -22,7 +22,7 @@ namespace DnDCharacterGenerator.View
             int indexerForBackgrounds = 1;
             foreach (KeyValuePair<string, List<string>> backGrounds in backgroundCollection)
             {
-                Console.WriteLine($"{indexerForBackgrounds}:" + " " + backGrounds.Key);
+                Console.Write($"{indexerForBackgrounds}:" + " " + backGrounds.Key + " | ");
                 indexerForBackgrounds++;
             }
         }

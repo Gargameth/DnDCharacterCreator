@@ -55,13 +55,14 @@ namespace DnDCharacterGenerator.Model
 
         private int RaceChooser(CharacterRacePrinter printer)
         {
+            printer.PrintRaceOptions();
             var chosenRace = printer.ReadInput();
             int raceNumber = 0;
             while (raceNumber < 1 || raceNumber > 9)
             {
                 if (!int.TryParse(chosenRace, out raceNumber) || raceNumber < 1 || raceNumber > 9)
                 {
-                    printer.PrintInvalidRaceInputText();
+                    printer.InvalidInputWarning();
                     chosenRace = printer.ReadInput();
                 }
             }
